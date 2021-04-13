@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h1>{% block title %}<u>User Settings</u>{% endblock %}</h1>
+
+	<div class="row base-margin">
+		<div class="col-12 panel panel--raised" style="background-color:#ced4da;">
+
+			<div class="row">
+				<div class="col-12">
+					<blockquote class="blockquote--dark">
+						<h3>User Info:</h3>
+						<p>Username: {{ session['username'] }}</p>
+						<p>Password (Hash): {{ session['password'] }}</p>
+					</blockquote>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<form method="post">
+						<div class="row base-margin-bottom">
+							<div class="col-6">
+								<blockquote class="blockquote--danger base-padding-left">
+									<div class="row">
+										<h3>ISE PxGrid Consumer Settings:</h3>
+									</div>
+									<div class="row base-margin-bottom">
+										<div class="col-6">
+											<label for="iseHost">ISE Domain: </label>
+											<input name="iseHost" id="iseHost" value="{{ session['config']['hostname'] }}">
+										</div>
+										<div class="col-6">
+											<label for="iseNode">ISE PxGrid Node: </label>
+											<input name="iseNode" id="iseNode" value="{{ session['config']['nodename'] }}">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-6">
+											<label for="iseCertPass">PxGrid Client Key Password: </label>
+											<input name="iseCertPass" id="iseCertPass" value="{{ session['config']['clientkeypassword'] }}">
+										</div>
+									</div>
+								</blockquote>
+							</div>
+							<div class="col-6">
+								<div class="row half-margin-bottom">
+									<label for="clientCert"><u>Upload ISE Client Certificate</u></label>
+									<input type="file" name="clientCert" id="clientCert">
+								</div>
+								<div class="row half-margin-bottom">
+									<label for="clientKey"><u>Upload ISE Client Key</u></label>
+									<input type="file" name="clientKey" id="clientKey">
+								</div>
+								<div class="row half-margin-bottom">
+									<label for="serverCert"><u>Upload ISE Server Certificate</u></label>
+									<input type="file" name="serverCert" id="serverCert">
+								</div>
+								<div class="row half-margin-bottom">
+									<label for="rootCert"><u>Upload ISE Root Services Certificate</u></label>
+									<input type="file" name="rootCert" id="rootCert">
+								</div>
+								<div class="row half-margin-bottom">
+									<label for="serviceCert"><u>Upload ISE Node Services Certificate</u></label>
+									<input type="file" name="serviceCert" id="serviceCert">
+								</div>
+								<div class="row half-margin-bottom">
+									<label for="endpointCert"><u>Upload ISE Endpoint Services Certificate</u></label>
+									<input type="file" name="endpointCert" id="endpointCert">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-4"><button class="btn btn--primary btn--large btn--justified" type="submit">Apply</button></div>
+							<div class="col-4"></div>
+							<div class="col-4"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block header %}
+	<h1>{% block title %}<u>Main Dashboard</u>{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+	<form method="post">
+		<!-- Available Organization Table -->
+		<div class="row base-margin">
+			<div class="col-12 panel panel--raised" style="background-color:#ced4da;">
+				<div class="row base-margin-top dbl-margin-bottom">
+					<div class="col-5"></div>
+					<div class="col-3" style="text-align:center;"><h5>ISE PxGrid Consumer:</h5></div>
+					{% if pxgrid_Account_Status['accountState'] == 'ENABLED' %}
+					<div class="col-3"><button class="btn btn--success btn--justified" name="pxgridAccountStatus">{{pxgrid_Account_Status['accountState']}}</button></div>
+					{% else %}
+					<div class="col-3"><button class="btn btn--danger btn--justified" name="pxgridAccountStatus">{{pxgrid_Account_Status['accountState']}}</button></div>
+					{% endif %}
+					<div class="col-1"></div>
+				</div>
+				<div class="row base-margin-bottom">
+					<div class="col-2"></div>
+					<div class="col-8">
+						<h5>Current ANC Policy Applied:</h5>
+						<table class="table table--striped">
+							<tr>
+								<th style="text-align: center;">Endpoint</th>
+								<th style="text-align: center;">Policy Applied</th>
+								<th></th>
+							</tr>
+							{% if pxgrid_And_Endpoints == [] %}
+							<tr>
+								<td></td>
+								<td>No Policies Currently Applied</td>
+								<td></td>
+							</tr>
+							{% else %}
+							{% for pxgrid_And_Endpoint in pxgrid_And_Endpoints %}
+							<tr>
+								<td style="text-align: center;">{{ pxgrid_And_Endpoint['macAddress'] }}</td>
+								<td style="text-align: center;">{{ pxgrid_And_Endpoint['policyName'] }}</td>
+								<td><button class="btn btn--danger btn--justified" name="endpointToClear" value="{{pxgrid_And_Endpoint['macAddress']}}">Clear</button></td>
+							</tr>
+							{% endfor %}
+							{% endif %}
+						</table>
+					</div>
+					<div class="col-2"></div>
+				</div>
+			</div>
+		</div>
+	</form>
+{% endblock %}

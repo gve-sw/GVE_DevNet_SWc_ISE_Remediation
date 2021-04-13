@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block header %}
+	<h1>{% block title %}<u>Create Remediation Task</u>{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+	<form method="post">
+		<div class="row base-margin-left">
+			<div class="col-11 panel panel--raised dbl-margin-right" style="background-color:#ced4da;">
+				<div class="row base-margin-top">
+					<div class="col-1"></div>
+					<div class="col-10" style="text-align:center;"><h3><u>Configure Task:</u></h3></div>
+					<div class="col-1"></div>
+				</div>
+				<div class="row base-margin-top">
+					<div class="col-2"></div>
+					<div class="col-3" style="text-align:center;">
+						<label for="ise_endpoint"><u>Select an Endpoint:</u></label>
+						<select name="ise_endpoint" id="ise_endpoint">
+							{% for activeSession in ise_Active_Sessions %}
+							<option value="{{ activeSession['ipAddresses'][0] }}">{{ activeSession['ipAddresses'][0] }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="col-2"></div>
+					<div class="col-3" style="text-align:center;">
+						<label for="ise_policy"><u>Select an ANC policy:</u></label>
+						<select name="ise_policy" id="ise_policy">
+							{% for policy in ise_Anc_Policies %}
+							<option value="{{ policy['name'] }}">{{ policy['name'] }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="col-2"></div>
+				</div>
+				<div class="row dbl-margin-top">
+					<div class="col-8"></div>
+					<div class="col-3">
+						<button class="btn btn--success btn--justified" name="applyPolicy" value="applyPolicy">Apply Policy</button>
+					</div>
+					<div class="col-1"></div>
+				</div>
+			</div>
+		</div>
+	</form>
+{% endblock %}
